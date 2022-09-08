@@ -11,8 +11,23 @@ on:
     branches:
       - master
 jobs:
+  dbsetup:
+    name: DB-Setup
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: spusu
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+
   #Test's job
   tests:
+    needs: dbsetup
     name: Unit tests
     #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest

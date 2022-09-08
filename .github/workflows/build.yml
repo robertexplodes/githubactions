@@ -17,6 +17,16 @@ jobs:
     #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest
     #Job's steps
+    services:
+      mariadb:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: spusu
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
     steps:
       #Check-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
       - uses: actions/checkout@v1
